@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
     await prepareDatabase()
     await insertDatabase({ temperature, humidity, heat_index })
 
-    return
+    return { status: 'ok' }
   } catch (e) {
     console.log('--- error (telemetry.post): ', e)
 
