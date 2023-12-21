@@ -9,16 +9,17 @@ const prepareDatabase = async () => {
       id bigserial primary key,
       temperature decimal,
       humidity decimal,
-      created_at integer
+      heat_index decimal,
+      created_at bigint
     );`
 
   console.log(`--- log (telemetry.post): preparing database... DONE!`)
 }
 
-const insertDatabase = async ({ temperature, humidity }) => {
+const insertDatabase = async ({ temperature, humidity, heat_index }) => {
   console.log(`--- log (telemetry.post): inserting telemetry into database`)
 
-  await sql`INSERT INTO telemetry (temperature, humidity, created_at) VALUES (${temperature}, ${humidity}, ${+new Date()});`
+  await sql`INSERT INTO telemetry (temperature, humidity, heat_index, created_at) VALUES (${temperature}, ${humidity}, ${heat_index}, ${+new Date()});`
 
   console.log(
     `--- log (telemetry.post): inserting telemetry into database... DONE!`
@@ -27,10 +28,10 @@ const insertDatabase = async ({ temperature, humidity }) => {
 
 export default defineEventHandler(async (event) => {
   try {
-    const { temperature, humidity } = await readBody(event)
+    const { temperature, humidity, heat_index } = await readBody(event)
 
     await prepareDatabase()
-    await insertDatabase({ temperature, humidity })
+    await insertDatabase({ temperature, humidity, heat_index })
 
     return
   } catch (e) {

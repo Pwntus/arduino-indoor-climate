@@ -3,13 +3,14 @@ import { sql } from '@vercel/postgres'
 const queryDatabase = async () => {
   console.log(`--- log (telemetry.get): querying telemetry from database`)
 
+  // await sql`DROP TABLE telemetry;`
   const result = await sql`SELECT * FROM telemetry;`
 
   console.log(
     `--- log (telemetry.get): querying telemetry from database... DONE!`
   )
 
-  return result
+  return result?.rows || []
 }
 
 export default defineEventHandler(async (event) => {

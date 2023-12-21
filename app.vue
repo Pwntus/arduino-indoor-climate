@@ -18,6 +18,18 @@ export default {
             'Content-Type': 'application/json'
           }
         })
+        /*
+        await fetch('/api/telemetry', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            temperature: 42.01,
+            humidity: 87.92
+          })
+        })
+        */
         this.result = await response.json()
       } catch (e) {
         console.log(e)
