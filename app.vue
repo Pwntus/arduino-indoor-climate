@@ -157,9 +157,9 @@ export default {
     latest_row: {
       deep: true,
       handler(value) {
-        this.gauge_temperature.value = value.temperature
-        this.gauge_humidity.value = value.humidity
-        this.gauge_heat_index.value = value.heat_index
+        this.gauge_temperature.value = parseFloat(value.temperature).toFixed(1)
+        this.gauge_humidity.value = parseFloat(value.humidity).toFixed(1)
+        this.gauge_heat_index.value = parseFloat(value.heat_index).toFixed(1)
 
         this.graph_temperature.data = this.rows.map(
           ({ created_at, temperature }) => ({
