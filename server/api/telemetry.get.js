@@ -1,10 +1,10 @@
 import { sql } from '@vercel/postgres'
 
-const queryDatabase = async () => {
+const queryDatabase = async ({ gte }) => {
   console.log(`--- log (telemetry.get): querying telemetry from database`)
 
   // await sql`DROP TABLE telemetry;`
-  const result = await sql`SELECT * FROM telemetry;`
+  const result = await sql`SELECT * FROM telemetry WHERE created_at >= ${gte};`
 
   console.log(
     `--- log (telemetry.get): querying telemetry from database... DONE!`
@@ -15,7 +15,14 @@ const queryDatabase = async () => {
 
 export default defineEventHandler(async (event) => {
   try {
-    const result = await queryDatabase()
+    let { gte } = getQuery(event)
+
+    // Sanity check
+    gte = gte ? parseInt(gte) : +new Date() - 86400000
+
+    console.log('DEBUG', gte)
+
+    const result = await queryDatabase({ gte })
 
     return result
   } catch (e) {

@@ -10,7 +10,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@vercel/postgres": "^0.5.1"
+    "@vercel/postgres": "^0.5.1",
+    "css-element-queries": "^1.2.3",
+    "dayjs": "^1.11.10",
+    "highcharts": "^11.2.0",
+    "vue3-circle-progress": "^1.0.7"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

@@ -28,7 +28,12 @@ const insertDatabase = async ({ temperature, humidity, heat_index }) => {
 
 export default defineEventHandler(async (event) => {
   try {
-    const { temperature, humidity, heat_index } = await readBody(event)
+    let { temperature, humidity, heat_index } = await readBody(event)
+
+    // Sanity check
+    temperature = parseFloat(temperature)
+    humidity = parseFloat(humidity)
+    heat_index = parseFloat(heat_index)
 
     await prepareDatabase()
     await insertDatabase({ temperature, humidity, heat_index })

@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
   app: {
     head: {
-      title: `Indoor Climate - Taavinkuja 5`,
+      title: `Indoor Climate - Taavinkuja 5 A 1`,
       link: [
         { rel: 'canonical', href: '' },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -33,7 +33,8 @@ export default defineNuxtConfig({
         {
           hid: 'description',
           name: 'description',
-          content: 'Monitor the indoor climate in real time at Taavinkuja 5.'
+          content:
+            'Monitor the indoor climate in real time at Taavinkuja 5 A 1.'
         },
         {
           hid: 'og:type',
@@ -57,13 +58,14 @@ export default defineNuxtConfig({
           hid: 'og:title',
           name: 'og:title',
           property: 'og:title',
-          content: 'Indoor Climate - Taavinkuja 5'
+          content: 'Indoor Climate - Taavinkuja 5 A 1'
         },
         {
           hid: 'og:description',
           name: 'og:description',
           property: 'og:description',
-          content: 'Monitor the indoor climate in real time at Taavinkuja 5.'
+          content:
+            'Monitor the indoor climate in real time at Taavinkuja 5 A 1.'
         },
         {
           hid: 'og:image',
