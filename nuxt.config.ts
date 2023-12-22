@@ -46,13 +46,13 @@ export default defineNuxtConfig({
           hid: 'og:url',
           name: 'og:url',
           property: 'og:url',
-          content: 'https:///'
+          content: 'https://arduino-indoor-climate.vercel.app/'
         },
         {
           hid: 'og:site_name',
           name: 'og:site_name',
           property: 'og:site_name',
-          content: '.com'
+          content: 'arduino-indoor-climate.vercel.app'
         },
         {
           hid: 'og:title',
@@ -71,7 +71,7 @@ export default defineNuxtConfig({
           hid: 'og:image',
           name: 'og:image',
           property: 'og:image',
-          content: 'https:///cover.jpg'
+          content: 'https://arduino-indoor-climate.vercel.app/cover.jpg'
         },
         {
           hid: 'msapplication-TileColor',
@@ -87,7 +87,7 @@ export default defineNuxtConfig({
         {
           hid: 'apple-mobile-web-app-title',
           name: 'apple-mobile-web-app-title',
-          content: '.com'
+          content: 'arduino-indoor-climate.vercel.app'
         }
       ],
       script: [],
