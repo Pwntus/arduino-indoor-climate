@@ -1,9 +1,9 @@
 <template lang="pug">
-.transition-opacity.opacity-0(
+.gauge.transition-opacity.opacity-0.w-full(
   :class="{ 'opacity-100': config.value !== null }"
 )
-  .relative
-    circle-progress(
+  .relative.mx-auto(class="max-w-[180px]")
+    circle-progress.aspect-square(
       :percent="percent"
       :fill-color="threshold.color"
       :border-width="15"
@@ -13,10 +13,14 @@
       .text-center(
         :style="{ color: threshold.color }"
       )
-        .font-normal {{ threshold.text }}
-        .text-xl.font-bold {{ config.value }} {{ config.suffix }}
-  .text-center.text-base.font-medium.mt-2(
-    class="lg:mt-4"
+        .text-xs.font-normal(
+          class="lg:text-base"
+        ) {{ threshold.text }}
+        .text-base.font-bold(
+          class="lg:text-lg"
+        ) {{ config.value }} {{ config.suffix }}
+  .text-center.text-xs.font-medium.mt-2(
+    class="lg:text-base lg:mt-4"
   ) {{ config.title }}
 </template>
 
@@ -47,4 +51,9 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style lang="stylus" scoped>
+.gauge
+  .vue3-circular-progressbar
+    width 100% !important
+    height unset !important
+</style>

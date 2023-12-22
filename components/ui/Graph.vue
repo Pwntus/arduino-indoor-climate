@@ -135,10 +135,6 @@ export default {
                 <td style="padding-right:8px;text-align:right">{series.name}:</td>
                 <td style="font-weight:bold;text-align:left;color:#0c2231">{point.y}</td>
               </tr>
-              <tr>
-                <td style="padding-right:8px;text-align:right">Date:</td>
-                <td style="font-weight:bold;text-align:left;color:#0c2231">{point.x}</td>
-              </tr>
             </table>`
         },
         xAxis: {

@@ -30,8 +30,8 @@
       .text-base.font-medium.text-neutral-500.mt-1(
         class="lg:text-xl lg:mt-2"
       ) Latest value, updated live.
-    .mt-6.grid.grid-cols-1.gap-4.flex.justify-items-center(
-      class="lg:mt-12 lg:grid-cols-3"
+    .mt-6.grid.grid-cols-3.gap-4.flex.justify-items-center(
+      class="lg:mt-12"
     )
       ui-gauge(:config="gauge_temperature")
       ui-gauge(:config="gauge_humidity")
