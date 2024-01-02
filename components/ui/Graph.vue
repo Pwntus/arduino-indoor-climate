@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { merge } from 'lodash'
+import { merge, cloneDeep } from 'lodash'
 
 /**
  * Highcharts options docs:
@@ -128,7 +128,7 @@ export default {
           useHTML: true,
           borderWidth: 0,
           borderRadius: 5,
-          headerFormat: '',
+          // headerFormat: '',
           pointFormat: `
             <table style="border:none;color:#000">
               <tr>
@@ -146,7 +146,7 @@ export default {
           endOnTick: false
         }
       }
-      this.chartOptions = merge(GLOBAL_OPTIONS, localOptions)
+      this.chartOptions = cloneDeep(merge(GLOBAL_OPTIONS, localOptions))
     }
   }
 }

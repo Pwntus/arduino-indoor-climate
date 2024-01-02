@@ -16,6 +16,27 @@
         span.text-transparent.bg-clip-text.bg-gradient-to-r.from-blue-700.to-blue-500 5 A 1
         | .
 
+    .mt-12.grid.grid-cols-4.gap-4(
+      v-if="false"
+      class="lg:mt-24"
+    )
+      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(
+          @click="gte_days = 1"
+          :class="`lg:px-4 hover:bg-neutral-300 text-neutral-800 ${gte_days === 1 ? 'bg-neutral-300 text-neutral-800' : ''}`"
+        ) 24H
+      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(
+          @click="gte_days = 3"
+          :class="`lg:px-4 hover:bg-neutral-300 text-neutral-800 ${gte_days === 3 ? 'bg-neutral-300 text-neutral-800' : ''}`"
+        ) 3D
+      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(
+          @click="gte_days = 7"
+          :class="`lg:px-4 hover:bg-neutral-300 text-neutral-800 ${gte_days === 7 ? 'bg-neutral-300 text-neutral-800' : ''}`"
+        ) 7D
+      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(
+          @click="gte_days = 30"
+          :class="`lg:px-4 hover:bg-neutral-300 text-neutral-800 ${gte_days === 30 ? 'bg-neutral-300 text-neutral-800' : ''}`"
+        ) 1M
+
     .mt-12(
       class="lg:mt-24"
     )
@@ -79,6 +100,7 @@ export default {
     last_updated_timeout: null,
 
     loading: true,
+    gte_days: 3,
     rows: null,
     latest_row: {
       id: null,
@@ -154,31 +176,10 @@ export default {
     }
   }),
   watch: {
-    latest_row: {
-      deep: true,
-      handler(value) {
-        this.gauge_temperature.value = parseFloat(value.temperature).toFixed(1)
-        this.gauge_humidity.value = parseFloat(value.humidity).toFixed(1)
-        this.gauge_heat_index.value = parseFloat(value.heat_index).toFixed(1)
-
-        this.graph_temperature.data = this.rows.map(
-          ({ created_at, temperature }) => ({
-            x: Number(created_at),
-            y: Number(temperature)
-          })
-        )
-        this.graph_humidity.data = this.rows.map(
-          ({ created_at, humidity }) => ({
-            x: Number(created_at),
-            y: Number(humidity)
-          })
-        )
-        this.graph_heat_index.data = this.rows.map(
-          ({ created_at, heat_index }) => ({
-            x: Number(created_at),
-            y: Number(heat_index)
-          })
-        )
+    gte_days: {
+      immediate: true,
+      handler() {
+        this.query()
       }
     }
   },
@@ -186,16 +187,17 @@ export default {
     async query() {
       try {
         this.loading = true
-        const response = await fetch('/api/telemetry', {
+        const gte = +new Date() - 86400000 * this.gte_days
+        const response = await fetch(`/api/telemetry?gte=${gte}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         })
-        this.rows = await response.json()
+        const { latest_row, rows } = await response.json()
+        this.rows = rows
 
         // Set latest row
-        const latest_row = this.rows[this.rows.length - 1]
         this.latest_row.id = latest_row?.id || null
         this.latest_row.temperature = latest_row?.temperature || null
         this.latest_row.humidity = latest_row?.humidity || null
@@ -207,17 +209,41 @@ export default {
             Number(this.latest_row.created_at)
           ).fromNow()
 
+        this.update_data()
+
         this.error = null
       } catch (e) {
         this.error = e.message
       } finally {
         this.loading = false
       }
+    },
+    update_data() {
+      const { temperature, humidity, heat_index } = this.latest_row
+
+      this.gauge_temperature.value = parseFloat(temperature).toFixed(1)
+      this.gauge_humidity.value = parseFloat(humidity).toFixed(1)
+      this.gauge_heat_index.value = parseFloat(heat_index).toFixed(1)
+
+      this.graph_temperature.data = this.rows.map(
+        ({ created_at, temperature }) => ({
+          x: Number(created_at),
+          y: Number(temperature)
+        })
+      )
+      this.graph_humidity.data = this.rows.map(({ created_at, humidity }) => ({
+        x: Number(created_at),
+        y: Number(humidity)
+      }))
+      this.graph_heat_index.data = this.rows.map(
+        ({ created_at, heat_index }) => ({
+          x: Number(created_at),
+          y: Number(heat_index)
+        })
+      )
     }
   },
   mounted() {
-    this.query()
-
     this.last_updated_timeout = setInterval(() => {
       this.query()
     }, UPDATE_TIMEOUT)
