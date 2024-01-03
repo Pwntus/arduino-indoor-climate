@@ -35,6 +35,9 @@ const GLOBAL_OPTIONS = {
       color: '#FFF'
     }
   },
+  time: {
+    timezoneOffset: -120 // UTC+2
+  },
   xAxis: {
     lineColor: '#f1f1f1',
     gridLineColor: '#f1f1f1',
