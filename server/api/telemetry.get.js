@@ -4,6 +4,7 @@ const queryDatabase = async ({ gte }) => {
   console.log(`--- log (telemetry.get): querying telemetry from database`)
 
   // await sql`DROP TABLE telemetry;`
+
   const result = await sql`SELECT * FROM telemetry WHERE created_at >= ${gte};`
 
   console.log(
@@ -26,7 +27,7 @@ export default defineEventHandler(async (event) => {
     const latest_row = result[result.length - 1]
 
     // Aggregate
-    const AGGREGATE_INTERVAL = 30 // 30 min
+    const AGGREGATE_INTERVAL = 60 // 30 min
     let rows = []
     while (result.length > 0) {
       const bucket = result.splice(0, AGGREGATE_INTERVAL)

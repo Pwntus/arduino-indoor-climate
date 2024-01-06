@@ -17,7 +17,7 @@
         | .
 
     .mt-12.grid.grid-cols-4.gap-4(
-      v-if="false"
+      v-if="true"
       class="lg:mt-24"
     )
       .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(

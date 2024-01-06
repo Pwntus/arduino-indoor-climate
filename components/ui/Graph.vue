@@ -149,7 +149,8 @@ export default {
           endOnTick: false
         }
       }
-      this.chartOptions = cloneDeep(merge(GLOBAL_OPTIONS, localOptions))
+      const globalOptions = JSON.parse(JSON.stringify(GLOBAL_OPTIONS))
+      this.chartOptions = cloneDeep(merge(globalOptions, localOptions))
     }
   }
 }
