@@ -19,21 +19,21 @@
     .mt-12.grid.grid-cols-4.gap-2(
       class="lg:mt-24 lg:gap-4"
     )
-      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-1.cursor-pointer(
+      .text-center.text-sm.text-neutral-800.font-medium.border.rounded-full.p-1.cursor-pointer(
           @click="gte_days = 1"
-          :class="`lg:px-4 lg:py-2 hover:bg-neutral-300 text-neutral-800 ${gte_days === 1 ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-500' : ''}`"
+          :class="`lg:px-4 lg:py-2 ${gte_days === 1 ? 'bg-blue-500 border-blue-500 hover:bg-blue-500 text-white' : 'hover:bg-neutral-300 border-neutral-300'}`"
         ) 24H
-      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-1.cursor-pointer(
+      .text-center.text-sm.text-neutral-800.font-medium.border.rounded-full.p-1.cursor-pointer(
           @click="gte_days = 3"
-          :class="`lg:px-4 lg:py-2 hover:bg-neutral-300 text-neutral-800 ${gte_days === 3 ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-500' : ''}`"
+          :class="`lg:px-4 lg:py-2 ${gte_days === 3 ? 'bg-blue-500 border-blue-500 hover:bg-blue-500 text-white' : 'hover:bg-neutral-300 border-neutral-300'}`"
         ) 3D
-      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-1.cursor-pointer(
+      .text-center.text-sm.text-neutral-800.font-medium.border.rounded-full.p-1.cursor-pointer(
           @click="gte_days = 7"
-          :class="`lg:px-4 lg:py-2 hover:bg-neutral-300 text-neutral-800 ${gte_days === 7 ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-500' : ''}`"
+          :class="`lg:px-4 lg:py-2 ${gte_days === 7 ? 'bg-blue-500 border-blue-500 hover:bg-blue-500 text-white' : 'hover:bg-neutral-300 border-neutral-300'}`"
         ) 7D
-      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-1.cursor-pointer(
+      .text-center.text-sm.text-neutral-800.font-medium.border.rounded-full.p-1.cursor-pointer(
           @click="gte_days = 30"
-          :class="`lg:px-4 lg:py-2 hover:bg-neutral-300 text-neutral-800 ${gte_days === 30 ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-500' : ''}`"
+          :class="`lg:px-4 lg:py-2 ${gte_days === 30 ? 'bg-blue-500 border-blue-500 hover:bg-blue-500 text-white' : 'hover:bg-neutral-300 border-neutral-300'}`"
         ) 1M
 
     .mt-12(
