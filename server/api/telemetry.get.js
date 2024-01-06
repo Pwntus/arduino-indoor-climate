@@ -5,7 +5,8 @@ const queryDatabase = async ({ gte }) => {
 
   // await sql`DROP TABLE telemetry;`
 
-  const result = await sql`SELECT * FROM telemetry WHERE created_at >= ${gte};`
+  const result =
+    await sql`SELECT * FROM telemetry WHERE created_at >= ${gte} ORDER BY created_at ASC;`
 
   console.log(
     `--- log (telemetry.get): querying telemetry from database... DONE!`
@@ -58,8 +59,6 @@ export default defineEventHandler(async (event) => {
         })
       }
     }
-
-    rows = rows.sort((a, b) => a.created_at - b.created_at)
 
     return { latest_row, rows }
   } catch (e) {
