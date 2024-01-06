@@ -16,25 +16,24 @@
         span.text-transparent.bg-clip-text.bg-gradient-to-r.from-blue-700.to-blue-500 5 A 1
         | .
 
-    .mt-12.grid.grid-cols-4.gap-4(
-      v-if="true"
-      class="lg:mt-24"
+    .mt-12.grid.grid-cols-4.gap-2(
+      class="lg:mt-24 lg:gap-4"
     )
-      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(
+      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-1.cursor-pointer(
           @click="gte_days = 1"
-          :class="`lg:px-4 hover:bg-neutral-300 text-neutral-800 ${gte_days === 1 ? 'bg-neutral-300 text-neutral-800' : ''}`"
+          :class="`lg:px-4 lg:py-2 hover:bg-neutral-300 text-neutral-800 ${gte_days === 1 ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-500' : ''}`"
         ) 24H
-      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(
+      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-1.cursor-pointer(
           @click="gte_days = 3"
-          :class="`lg:px-4 hover:bg-neutral-300 text-neutral-800 ${gte_days === 3 ? 'bg-neutral-300 text-neutral-800' : ''}`"
+          :class="`lg:px-4 lg:py-2 hover:bg-neutral-300 text-neutral-800 ${gte_days === 3 ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-500' : ''}`"
         ) 3D
-      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(
+      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-1.cursor-pointer(
           @click="gte_days = 7"
-          :class="`lg:px-4 hover:bg-neutral-300 text-neutral-800 ${gte_days === 7 ? 'bg-neutral-300 text-neutral-800' : ''}`"
+          :class="`lg:px-4 lg:py-2 hover:bg-neutral-300 text-neutral-800 ${gte_days === 7 ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-500' : ''}`"
         ) 7D
-      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-2.cursor-pointer(
+      .text-center.text-sm.text-neutral-400.font-medium.border.border-neutral-300.rounded-full.p-1.cursor-pointer(
           @click="gte_days = 30"
-          :class="`lg:px-4 hover:bg-neutral-300 text-neutral-800 ${gte_days === 30 ? 'bg-neutral-300 text-neutral-800' : ''}`"
+          :class="`lg:px-4 lg:py-2 hover:bg-neutral-300 text-neutral-800 ${gte_days === 30 ? 'bg-blue-500 text-white border-blue-500 hover:bg-blue-500' : ''}`"
         ) 1M
 
     .mt-12(
@@ -51,8 +50,8 @@
       .text-base.font-medium.text-neutral-500.mt-1(
         class="lg:text-xl lg:mt-2"
       ) Latest value, updated live.
-    .mt-6.grid.grid-cols-3.gap-4.flex.justify-items-center(
-      class="lg:mt-12"
+    .mt-6.grid.grid-cols-3.gap-2.flex.justify-items-center(
+      class="lg:mt-12 lg:gap-4"
     )
       ui-gauge(:config="gauge_temperature")
       ui-gauge(:config="gauge_humidity")
@@ -79,7 +78,7 @@
         ui-graph(:config="graph_temperature")
       .h-64
         ui-graph(:config="graph_humidity")
-    .mt-6(
+    .mt-0(
       class="lg:mt-12"
     )
       .h-64
