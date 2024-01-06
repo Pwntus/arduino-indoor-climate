@@ -70,8 +70,8 @@ void loop() {
   Serial.print(F(", response: "));
   Serial.println(client.responseBody());
 
-  // Reset every 90 min (1.5 hours)
-  if (millis() >= 5400000) {
+  // Reset every 30 min
+  if (millis() >= 1800000) {
     Serial.println("Resetting!");
     digitalWrite(RESETPIN, LOW);
   }

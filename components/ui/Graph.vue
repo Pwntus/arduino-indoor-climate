@@ -149,7 +149,10 @@ export default {
           endOnTick: false
         }
       }
+
+      // This is necessary to prevent mutation of the global options which will be shared across multiple cops of this SFC.
       const globalOptions = JSON.parse(JSON.stringify(GLOBAL_OPTIONS))
+
       this.chartOptions = cloneDeep(merge(globalOptions, localOptions))
     }
   }
