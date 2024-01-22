@@ -1,18 +1,19 @@
-import { sql } from '@vercel/postgres'
+import supabase from './supabase.client'
 
 const queryDatabase = async ({ gte }) => {
   console.log(`--- log (telemetry.get): querying telemetry from database`)
 
-  // await sql`DROP TABLE telemetry;`
-
-  const result =
-    await sql`SELECT * FROM telemetry WHERE created_at >= ${gte} ORDER BY created_at ASC;`
+  const { data, error } = await supabase
+    .from('telemetry')
+    .select()
+    .gte('created_at', gte)
+    .order('created_at', { ascending: true })
 
   console.log(
     `--- log (telemetry.get): querying telemetry from database... DONE!`
   )
 
-  return result?.rows || []
+  return data || []
 }
 
 export default defineEventHandler(async (event) => {

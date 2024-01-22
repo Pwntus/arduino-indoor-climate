@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres'
+import supabase from './supabase.client'
 
 const prepareDatabase = async () => {
   console.log(`--- log (telemetry.post): preparing database:`)
@@ -19,7 +19,12 @@ const prepareDatabase = async () => {
 const insertDatabase = async ({ temperature, humidity, heat_index }) => {
   console.log(`--- log (telemetry.post): inserting telemetry into database`)
 
-  await sql`INSERT INTO telemetry (temperature, humidity, heat_index, created_at) VALUES (${temperature}, ${humidity}, ${heat_index}, ${+new Date()});`
+  const { error } = await supabase.from('telemetry').insert({
+    temperature: temperature,
+    humidity: humidity,
+    heat_index: heat_index,
+    created_at: +new Date()
+  })
 
   console.log(
     `--- log (telemetry.post): inserting telemetry into database... DONE!`
@@ -35,7 +40,7 @@ export default defineEventHandler(async (event) => {
     humidity = parseFloat(humidity)
     heat_index = parseFloat(heat_index)
 
-    await prepareDatabase()
+    // await prepareDatabase()
     await insertDatabase({ temperature, humidity, heat_index })
 
     return { status: 'ok' }
