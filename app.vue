@@ -71,18 +71,27 @@
       .text-base.font-medium.text-neutral-500.mt-1(
         class="lg:text-xl lg:mt-2"
       ) Latest 24 hours.
-    .mt-6(
-      class="lg:mt-12 lg:grid lg:grid-cols-2 lg:gap-4"
-    )
+    .mt-6(class="lg:mt-12")
       .h-64
         ui-graph(:config="graph_temperature")
       .h-64
         ui-graph(:config="graph_humidity")
-    .mt-0(
-      class="lg:mt-12"
-    )
       .h-64
         ui-graph(:config="graph_heat_index")
+
+    template(v-if="false")
+      .mt-6(
+        class="lg:mt-12 lg:grid lg:grid-cols-2 lg:gap-4"
+      )
+        .h-64
+          ui-graph(:config="graph_temperature")
+        .h-64
+          ui-graph(:config="graph_humidity")
+      .mt-0(
+        class="lg:mt-12"
+      )
+        .h-64
+          ui-graph(:config="graph_heat_index")
 </template>
 
 <script>
